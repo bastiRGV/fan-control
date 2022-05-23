@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Fan modes:
+check - check current mode
+2 - Silent, 1 - Turbo, 0 - Balance"
+
+read mode 
+
+if [[ $mode =~ [0-2] ]]
+then
+    echo "$mode" > /sys/devices/platform/asus-nb-wmi/throttle_thermal_policy
+    echo "set fan mode: $mode"
+elif [[ $mode = 'check' ]]
+then
+    current=$(</sys/devices/platform/asus-nb-wmi/throttle_thermal_policy)
+    echo "current mode: $current"
+else
+    echo "invalid input"
+fi
