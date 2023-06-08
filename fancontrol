@@ -13,7 +13,17 @@ then
 elif [[ $mode = 'check' ]]
 then
     current=$(</sys/devices/platform/asus-nb-wmi/throttle_thermal_policy)
-    echo "current mode: $current"
+    case $current in
+        0)
+            echo "current mode: Balance"
+            ;;
+        1)
+            echo "current mode: Turbo"
+            ;;
+        2)
+            echo "current mode: Silent"
+            ;;
+    esac
 else
     echo "invalid input"
 fi
